@@ -14,7 +14,7 @@ const register = (database) => {
       joined: new Date(),
     });
     res.json({
-      message: "new user added",
+      message: "success",
       user: database.users[database.users.length - 1],
     });
   });

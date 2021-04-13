@@ -34,6 +34,7 @@ export default function Signin() {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "success") {
+          localStorage.setItem("user", JSON.stringify(data.user));
           router.push("/");
         }
       })
