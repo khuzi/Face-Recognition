@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const signin = require("./routes/signin");
 const register = require("./routes/register");
 const profile = require("./routes/profile");
@@ -29,6 +30,7 @@ const database = {
 };
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(signin(database));
 app.use(register(database));

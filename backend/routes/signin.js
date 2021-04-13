@@ -13,10 +13,11 @@ const signin = (database) => {
     });
     if (dt_user) {
       res.status(200).json({
-        message: "login success",
+        message: "success",
+        user: dt_user,
       });
     } else {
-      res.status(400).json("login failed");
+      res.status(400).json("failed");
     }
   });
 };
