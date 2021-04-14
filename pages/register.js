@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+
+import { useAuth } from "../context/globalstate";
+import { SIGNUP } from "../context/actions";
 
 export default function Register() {
-  const router = useRouter();
+  const { dispatch } = useAuth();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -19,28 +21,6 @@ export default function Register() {
 
   const onPasswordChange = (event) => {
     setState((prevState) => ({ ...prevState, password: event.target.value }));
-  };
-
-  const onSubmitSignIn = () => {
-    fetch("http://localhost:3000/register", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: state.email,
-        password: state.password,
-        name: state.name,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "success") {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          router.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log("Error in signup", err);
-      });
   };
 
   return (
@@ -88,7 +68,16 @@ export default function Register() {
           </fieldset>
           <div className="">
             <input
-              onClick={onSubmitSignIn}
+              onClick={() =>
+                dispatch({
+                  type: SIGNUP,
+                  payload: {
+                    email: state.email,
+                    password: state.password,
+                    name: state.name,
+                  },
+                })
+              }
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
               value="Register"

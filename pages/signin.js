@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+
+import { useAuth } from "../context/globalstate";
+import { SIGNIN } from "../context/actions";
 
 export default function Signin() {
-  const router = useRouter();
-  const [state, setState] = useState({
+  const [stat, setState] = useState({
     signInEmail: "",
     signInPassword: "",
   });
+  const { state, dispatch } = useAuth();
 
   const onEmailChange = (event) => {
     setState((prevState) => ({
@@ -20,27 +22,6 @@ export default function Signin() {
       ...prevState,
       signInPassword: event.target.value,
     }));
-  };
-
-  const onSubmitSignIn = () => {
-    fetch("http://localhost:3000/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: state.signInEmail,
-        password: state.signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "success") {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          router.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log("Error in signin", err);
-      });
   };
 
   return (
@@ -76,7 +57,15 @@ export default function Signin() {
           </fieldset>
           <div className="">
             <input
-              onClick={onSubmitSignIn}
+              onClick={() =>
+                dispatch({
+                  type: SIGNIN,
+                  payload: {
+                    email: stat.signInEmail,
+                    password: stat.signInPassword,
+                  },
+                })
+              }
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
               value="Sign in"
