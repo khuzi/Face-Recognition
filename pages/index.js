@@ -38,12 +38,5 @@ export default function Home() {
         <ImageLinkForm />
       </>
     );
-    return (
-      <>
-        <Logo />
-        <Rank />
-        <ImageLinkForm />
-      </>
-    );
   }
 }
