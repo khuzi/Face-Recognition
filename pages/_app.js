@@ -1,7 +1,7 @@
 import Particles from "react-particles-js";
 import "tachyons";
 
-import { AuthContextProvider } from "../context/globalstate";
+import { ContextProvider } from "../context/globalstate";
 import { Layout } from "../components";
 
 import "../styles/globals.css";
@@ -20,12 +20,12 @@ const paramsOptions = {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthContextProvider>
+    <ContextProvider>
       <Layout>
         <Particles className="particles" params={paramsOptions} />
         <Component {...pageProps} />
       </Layout>
-    </AuthContextProvider>
+    </ContextProvider>
   );
 }
 

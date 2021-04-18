@@ -4,3 +4,7 @@ export default createContext({
   user: null,
   isSignedIn: false,
 });
+
+export const FaceContext = createContext({
+  imageUrl: "",
+});

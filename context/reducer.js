@@ -1,6 +1,6 @@
 import Router from "next/router";
 
-import { SETUSER, SIGNIN, SIGNUP, SIGNOUT } from "./actions";
+import { SETUSER, SIGNIN, SIGNUP, SIGNOUT, SETURL } from "./actions";
 
 const onSubmitSignIn = async (signInEmail, signInPassword) => {
   const response = await fetch("http://localhost:3000/signin", {
@@ -60,6 +60,15 @@ export const authReducer = (state, action) => {
 
     case SIGNOUT:
       return onSignout();
+    default:
+      return state;
+  }
+};
+
+export const faceReducer = (state, action) => {
+  switch (action.type) {
+    case SETURL:
+      return { imageUrl: action.payload };
     default:
       return state;
   }
