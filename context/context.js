@@ -7,4 +7,5 @@ export default createContext({
 
 export const FaceContext = createContext({
   imageUrl: "",
+  box: false,
 });

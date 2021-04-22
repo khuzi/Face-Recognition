@@ -10,9 +10,7 @@ const image = (database) => {
       if (user.id === id) {
         found = true;
         user.entries++;
-        return res
-          .status(200)
-          .json({ message: "entries increased", entries: user.entries });
+        return res.status(200).json(user.entries);
       }
     });
     if (!found) {

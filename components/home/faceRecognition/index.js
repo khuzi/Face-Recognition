@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./faceRecognition.module.css";
 
 export const FaceRecognition = ({ imageUrl, box }) => {
@@ -12,15 +13,17 @@ export const FaceRecognition = ({ imageUrl, box }) => {
     >
       <div className="absolute mt1">
         <img id="inputimage" alt="" src={imageUrl} width="400px" heigh="auto" />
-        {/* <div
-          className={styles.bounding_box}
-          style={{
-            top: box.topRow,
-            right: box.rightCol,
-            bottom: box.bottomRow,
-            left: box.leftCol,
-          }}
-        ></div> */}
+        {box && (
+          <div
+            className={styles.bounding_box}
+            style={{
+              top: box.topRow,
+              right: box.rightCol,
+              bottom: box.bottomRow,
+              left: box.leftCol,
+            }}
+          ></div>
+        )}
       </div>
     </div>
   );
